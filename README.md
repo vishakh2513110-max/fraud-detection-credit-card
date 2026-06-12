@@ -55,6 +55,18 @@ Analyzed Precision-Recall tradeoff across different thresholds.
 - Recall: 0.85
 - F1-Score: 0.83 (after threshold tuning)
 - Confusion Matrix: TP=83, TN=56,840, FP=24, FN=15
+- 
+## Final Model Selection
+
+Although Random Forest achieved a slightly higher F1-score at the default threshold, XGBoost achieved the highest ROC-AUC score (0.9753), indicating better discrimination between fraud and legitimate transactions.
+
+After hyperparameter tuning and threshold tuning, XGBoost achieved:
+- Precision: 0.81
+- Recall: 0.85
+- F1-Score: 0.83
+- ROC-AUC: 0.9753
+
+Therefore, XGBoost was selected as the final model
 
 ## Feature Importance
 V14 emerged as the most important feature with approximately 62% importance, followed by V4 and V12. Features are PCA-transformed for privacy.
