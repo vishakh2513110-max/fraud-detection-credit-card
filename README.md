@@ -66,10 +66,10 @@ After hyperparameter tuning and threshold tuning, XGBoost achieved:
 - F1-Score: 0.83
 - ROC-AUC: 0.9753
 
-Therefore, XGBoost was selected as the final model
+Therefore,Selected XGBoost as the final model due to highest ROC-AUC (0.9753) and strong fraud detection performance
 
 ## Feature Importance
-V14 emerged as the most important feature with approximately 62% importance, followed by V4 and V12. Features are PCA-transformed for privacy.
+V14 emerged as the most important feature, followed by V4 and V12, according to XGBoost feature importance analysis.
 
 ## Business Impact
 
