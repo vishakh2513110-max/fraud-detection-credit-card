@@ -47,28 +47,24 @@ Analyzed Precision-Recall tradeoff across different thresholds.
 | 0.5 | 0.78 | 0.85 | 0.81 |
 | 0.6 | 0.81 | 0.85 | 0.83 |
 
-## Final Model Results
+## Key Highlights
 
-Final Tuned XGBoost model (threshold = 0.6) achieved:
+- Tuned XGBoost selected as final model
 - ROC-AUC: 0.9753
 - Precision: 0.81
 - Recall: 0.85
-- F1-Score: 0.83
-
-## Confusion Matrix
-
-| | Predicted: Legitimate | Predicted: Fraud |
-|---|---|---|
-| Actual: Legitimate | TN = 56,840 | FP = 24 |
-| Actual: Fraud | FN = 15 | TP = 83 |
+- F1-Score: 0.83 (after threshold tuning)
+- Confusion Matrix: TP=83, TN=56,840, FP=24, FN=15
 
 ## Feature Importance
 V14 emerged as the most important feature with approximately 62% importance, followed by V4 and V12. Features are PCA-transformed for privacy.
 
 ## Business Impact
+
 - Correctly detected 83 out of 98 fraud transactions
 - Achieved 85% fraud recall
-- Threshold tuning allows organizations to balance fraud detection and false alarms based on business requirements, without retraining the model
+- Threshold tuning improved F1-score from 0.81 to 0.83 without retraining the model
+- Allows organizations to adjust fraud sensitivity based on business requirements
 
 ## Future Improvements
 - SHAP values for model interpretability
