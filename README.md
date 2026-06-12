@@ -1,91 +1,61 @@
-# Credit Card Fraud Detection using Machine Learning
+# Credit Card Fraud Detection
 
 ## Problem Statement
-The objective of this project is to detect fraudulent credit card transactions and distinguish them from legitimate transactions. Since fraud cases are extremely rare, the project focuses on handling class imbalance and minimizing missed fraud cases.
-
----
+Built a Fraud Detection System to identify fraudulent credit card transactions using Machine Learning.
 
 ## Dataset
-- Dataset: Kaggle Credit Card Fraud Detection Dataset
-- Total Transactions: 284,807
-- Fraudulent Transactions: 492 (~0.17%)
-- Features: Time, Amount, V1-V28 (PCA-transformed features)
-- Target Variable:
-  - 0 = Legitimate Transaction
-  - 1 = Fraudulent Transaction
+- Kaggle Credit Card Fraud Detection Dataset
+- 284,807 transactions, 0.17% fraud cases
+- Highly imbalanced dataset (492 fraud out of 284,807)
 
----
+## Tech Stack
+- Python, Scikit-learn, XGBoost, Imbalanced-learn
+- SMOTE for class imbalance handling
+- RandomizedSearchCV for hyperparameter tuning
 
-## Technologies Used
-- Python
-- Pandas
-- NumPy
-- Scikit-learn
-- XGBoost
-- Imbalanced-learn (SMOTE)
-- Matplotlib
-- Seaborn
+## Preprocessing
+- StandardScaler applied on Amount feature
+- Time feature dropped
+- 80-20 train-test split with stratification
+- SMOTE applied only on training data to avoid data leakage
 
----
-
-## Project Workflow
-
-1. Data Loading and Exploration
-2. Data Preprocessing
-3. Train-Test Split
-4. Handling Class Imbalance using SMOTE
-5. Model Training
-   - Logistic Regression
-   - Random Forest
-   - XGBoost
-6. Model Evaluation
-7. Model Comparison
-8. Selection of Best Model
-
----
-
-## Model Performance
+## Models Compared
 
 | Model | Precision | Recall | F1-Score | ROC-AUC |
-|---------|---------|---------|---------|---------|
-| Logistic Regression | 0.06 | 0.92 | 0.11 | 0.97 |
+|-------|-----------|--------|----------|---------|
+| Logistic Regression | 0.06 | 0.92 | 0.11 | 0.9700 |
 | Random Forest | 0.87 | 0.83 | 0.85 | 0.9737 |
-| XGBoost | 0.89 | 0.92 | 0.90 | 0.98 |
+| XGBoost (Default) | 0.69 | 0.87 | 0.77 | 0.9753 |
+| XGBoost (Tuned) | 0.78 | 0.85 | 0.81 | 0.9753 |
 
----
+## Hyperparameter Tuning
+Used RandomizedSearchCV with 3-fold cross-validation.
 
-## Why XGBoost?
+Best parameters found:
+- n_estimators: 300
+- max_depth: 6
+- learning_rate: 0.2
+- subsample: 0.7
 
-XGBoost achieved the best overall performance among all models.
+## Threshold Tuning
+Analyzed Precision-Recall tradeoff across different thresholds.
 
-- Precision: 89%
-- Recall: 92%
-- F1-Score: 90%
-- ROC-AUC: 0.98
+| Threshold | Precision | Recall | F1-Score |
+|-----------|-----------|--------|----------|
+| 0.3 | 0.70 | 0.85 | 0.76 |
+| 0.4 | 0.78 | 0.85 | 0.81 |
+| 0.5 | 0.78 | 0.85 | 0.81 |
+| 0.6 | 0.81 | 0.85 | 0.83 |
 
-XGBoost outperformed Random Forest because it uses boosting, where each new tree focuses on correcting the mistakes made by previous trees. This helped capture rare fraud patterns more effectively.
+## Feature Importance
+V14 emerged as the most important feature with 62% importance, followed by V4 and V12. Features are PCA-transformed for privacy.
 
----
+## Key Highlights
+- XGBoost (Tuned) selected as final model with best F1-Score of 0.81 and ROC-AUC of 0.9753
+- Confusion Matrix: 83 true positives, 15 false negatives, 24 false positives
+- Threshold tuning demonstrates business flexibility for different risk requirements without retraining
 
-## Key Learnings
+## Future Improvements
+- SHAP values for model interpretability
+- Real-time deployment via FastAPI
 
-- Handling highly imbalanced datasets
-- SMOTE and data leakage prevention
-- Precision vs Recall trade-off
-- Ensemble Learning
-- Random Forest
-- XGBoost
-- ROC-AUC Evaluation
-- Fraud Detection using Machine Learning
-
----
-
-## Business Impact
-
-The final model can automatically flag suspicious transactions for further investigation. This can help financial institutions reduce fraud-related losses and improve operational efficiency.
-
----
-
-## Author
-
-Vishakh
